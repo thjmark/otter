@@ -30,5 +30,5 @@ String evaluate(String expression, {List<String>? flags}) {
   final parser = _buildTree(expression);
   final tree = parser.result();
   final result = NumberVisitor(NumberFactory(flags ?? [])).visit(tree);
-  return result?.printForBase() ?? '';
+  return result?.toString() ?? '';
 }
