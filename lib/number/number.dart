@@ -1,53 +1,30 @@
-import 'dart:math';
 
-import 'package:otter/number/number_printer.dart';
 
-class Number  {
-  final NumberPrinter numberPrinter = NumberPrinter();
+abstract class Number  {
 
   Number(this.value, {int? base}) : base = base ?? 10;
 
-  final int value;
+  final num value;
   final int base;
 
   @override
-  String toString() {
-    return numberPrinter.printIntForBase(value: value, base: base);
-  }
+  String toString();
 
-  Number flipSign() {
-    return Number(-value);
-  }
+  Number flipSign();
 
-  Number add(Number secondSummand) {
-    return Number(value + secondSummand.value);
-  }
+  Number add(Number secondSummand);
 
-  Number subtract(Number subtrahend) {
-    return Number(value - subtrahend.value);
-  }
+  Number subtract(Number subtrahend);
 
-  Number multiply(Number secondFactor) {
-    return Number(value * secondFactor.value);
-  }
+  Number multiply(Number secondFactor);
 
-  Number divide(Number divisor) {
-    return Number((value / divisor.value).round());
-  }
+  Number divide(Number divisor);
 
-  Number nPow(Number exponent) {
-    return Number(pow(value, exponent.value).round());
-  }
+  Number nPow(Number exponent);
 
-  Number modulo(Number divisor) {
-    return Number(value % divisor.value);
-  }
+  Number modulo(Number divisor);
 
-  Number setBase(int newBase){
-    return Number(value,base: newBase);
-  }
+  Number setBase(int newBase);
 
-  Number nSqrt(){
-    return Number(sqrt(value).round());
-  }
+  Number nSqrt();
 }

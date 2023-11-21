@@ -5,7 +5,7 @@ import 'package:otter/number_visitor.dart';
 import 'package:otter/parser/OtterLexer.dart';
 import 'package:otter/parser/OtterParser.dart';
 
-int calculate(String expression, {List<String>? flags}) {
+num calculate(String expression, {List<String>? flags}) {
   Number? result = _evaluateExpression(expression, flags ?? []);
   return result?.value ?? 0;
 }

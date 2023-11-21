@@ -1,7 +1,7 @@
 import 'package:otter/parsing_error.dart';
 import 'package:otter/number/number_constants.dart';
 
-class NumberPrinter {
+class WholeNumberPrinter {
   String printIntForBase({required int value, required int base}) {
     _checkBase(base);
     String result = _mapNumber(value: value, base: base);

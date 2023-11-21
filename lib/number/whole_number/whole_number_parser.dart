@@ -1,7 +1,7 @@
 import 'package:otter/number/number_constants.dart';
 import 'package:otter/parsing_error.dart';
 
-class NumberParser {
+class WholeNumberParser {
   static final String baseSplitter = "#";
 
   static int parseInt(String text) {
