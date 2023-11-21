@@ -4,10 +4,9 @@ import 'package:otter/number/number_constants.dart';
 import 'package:otter/parsing_error.dart';
 
 class NumberParser {
-  static final String baseSplitter = "#";
 
   static int parseInt(String text, int base) {
-    final characterList = text.trim().split(baseSplitter)[0].runes;
+    final characterList = text.trim().runes;
     int result = 0;
     for (var element in characterList) {
       result *= base;
@@ -45,12 +44,6 @@ class NumberParser {
     }
   }
 
-  static int getBase(String text) {
-    if (text.contains(baseSplitter)) {
-      return int.parse(text.split(baseSplitter)[1]);
-    }
-    return 10;
-  }
 
   static double parsePostDecimalPointPart(String input, int base) {
     var result = 0.0;

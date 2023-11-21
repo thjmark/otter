@@ -44,7 +44,12 @@ void main() {
     testFloatEquals(calculate("1.0@1010#2"), 1024.0);
   });
 
-  test('parseNumber floating Point number full exponent', () {
+  test('parseNumber floating Point number full exponent default base', () {
+    testFloatEquals(calculate("-9.221@-32", flags: ["-f"]), -9.221e-32);
+    testFloatEquals(calculate("-9.221@32", flags: ["-f"]), -9.221e32);
+  });
+
+  test('parseNumber floating Point number no exponent', () {
     testFloatEquals(calculate("3122.122#10", flags: ["-f"]), 3122.122);
     testFloatEquals(calculate("0.01#2", flags: ["-f"]), 0.25);
   });

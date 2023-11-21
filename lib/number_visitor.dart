@@ -1,5 +1,6 @@
 import 'package:otter/number/number_factory.dart';
 import 'package:otter/number/number_parser.dart';
+import 'package:otter/number_context_selector.dart';
 import 'package:otter/parser/OtterParser.dart';
 import 'package:otter/parser/OtterVisitor.dart';
 import 'package:otter/parsing_error.dart';
@@ -93,40 +94,58 @@ class NumberVisitor extends OtterVisitor<Number> {
 
   @override
   Number? visitDecimal(DecimalContext ctx) {
-    return numberFactory.parseFloat(ctx.children!, ctx.childCount);// TODO(ThorstenJahrsetz): 09.01.23 clean this up
+    return numberFactory.parseFloat(
+        base: NumberContextSelector.getBase(ctx),
+        beforeDecimalPointPart: NumberContextSelector.getBeforeDecimalElement(ctx),
+        afterDecimalPointPart: NumberContextSelector.getAfterDecimalPointElement(ctx));
   }
 
   @override
   Number? visitDecimalBase10(DecimalBase10Context ctx) {
-    return numberFactory.parseFloat(ctx.children!, ctx.childCount);// TODO(ThorstenJahrsetz): 09.01.23 clean this up
+    return numberFactory.parseFloat(
+        beforeDecimalPointPart: NumberContextSelector.getBeforeDecimalElement(ctx),
+        afterDecimalPointPart: NumberContextSelector.getAfterDecimalPointElement(ctx),
+        base: 10);
   }
 
   @override
   Number? visitFloat(FloatContext ctx) {
-    return numberFactory.parseFloat(ctx.children!, ctx.childCount);// TODO(ThorstenJahrsetz): 09.01.23 clean this up
+    final exponentHasSign = ctx.childCount > 7;
+    return numberFactory.parseFloat(
+        base: NumberContextSelector.getBase(ctx),
+        beforeDecimalPointPart: NumberContextSelector.getBeforeDecimalElement(ctx),
+        afterDecimalPointPart: NumberContextSelector.getAfterDecimalPointElement(ctx),
+        exponentSign: NumberContextSelector.getSignOfExponent(exponentHasSign, ctx),
+        exponent: NumberContextSelector.getExponentValue(exponentHasSign, ctx));
   }
 
   @override
   Number? visitFloatBase10(FloatBase10Context ctx) {
-    return numberFactory.parseFloat(ctx.children!, ctx.childCount);// TODO(ThorstenJahrsetz): 09.01.23 clean this up
+    final exponentHasSign = ctx.childCount > 5;
+    return numberFactory.parseFloat(
+        base: 10,
+        beforeDecimalPointPart: NumberContextSelector.getBeforeDecimalElement(ctx),
+        afterDecimalPointPart: NumberContextSelector.getAfterDecimalPointElement(ctx),
+        exponent: NumberContextSelector.getExponentValue(exponentHasSign, ctx),
+        exponentSign: NumberContextSelector.getSignOfExponent(exponentHasSign, ctx));
   }
 
   @override
   Number? visitInt(IntContext ctx) {
-    return numberFactory.parseNumber(ctx.text); // TODO(ThorstenJahrsetz): 09.01.23 clean this up
+    return numberFactory.parseNumber(expression: _getNumberElement(ctx), base: NumberContextSelector.getBase(ctx));
   }
+
+  String _getNumberElement(NumberContext ctx) => ctx.children![0].text!;
 
   @override
   Number? visitIntBase10(IntBase10Context ctx) {
-    return numberFactory.parseNumber(ctx.text);// TODO(ThorstenJahrsetz): 09.01.23 clean this up
+    return numberFactory.parseNumber(expression: _getNumberElement(ctx), base: 10);
   }
 
   @override
   Number? visitSign(SignContext ctx) {
     return _handleSign(ctx);
   }
-
-
 
   Number _handleSign(NumberContext ctx) {
     final absoluteValue = ctx.children![1].accept(this);
@@ -135,5 +154,4 @@ class NumberVisitor extends OtterVisitor<Number> {
     }
     return absoluteValue!;
   }
-
 }
