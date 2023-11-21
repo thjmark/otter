@@ -21,13 +21,22 @@ class NumberFactory {
 
   final exponentSeparator = '@';
   final decimalPoint = '.';
+  final baseSeparator = '#';
 
   Number parseFloat(List<ParseTree> children, int childNumber) {
-    final base = int.parse(children[childNumber - 1].text!);
+    int base = _getBase(children, childNumber);
     double number = _getValue(children, base);
     double exponentialPart = _getExponentialPart(children, childNumber, base);
 
     return FloatNumber(number * exponentialPart);
+  }
+
+  int _getBase(List<ParseTree> children, int childNumber) {
+    var base = 10;
+    if (children[childNumber - 2].text == baseSeparator) {
+      base = int.parse(children[childNumber - 1].text!);
+    }
+    return base;
   }
 
   double _getExponentialPart(List<ParseTree> children, int childNumber, int base) {
@@ -35,7 +44,8 @@ class NumberFactory {
     if (indexExponentSeparator < 0) {
       return 1;
     }
-    final exponentElements = children.sublist(indexExponentSeparator + 1, childNumber - 2);
+    final endOfList = children.map((e) => e.text).contains("#") ? childNumber - 2 : childNumber;
+    final exponentElements = children.sublist(indexExponentSeparator + 1, endOfList);
     final exponentValue = NumberParser.parseInt(exponentElements.last.text!, base);
     final exponentSign = exponentElements.length == 2 ? (exponentElements[0].text == '-' ? -1 : 1) : 1;
     return pow(base.toDouble(), exponentValue * exponentSign).toDouble();

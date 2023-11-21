@@ -109,4 +109,18 @@ void main() {
   test("should calculate sqrt of number", () {
     expect(evaluate("sqrt(16)"), "4");
   });
+
+  test("should evalutate double numbers with all baseses", () {
+    expect(evaluate("sqrt(15.2#10+0.7#10)/19.0#10", flags: ["-f"]), "2.098673898671251@-1");
+    expect(evaluate("1.0@25#10+1.0@24#10", flags: ["-f"]), "1.1@25");
+    expect(evaluate("1.1@1010#2+1.0@1001#2=#2", flags: ["-f"]), "1.0@1011#2");
+  });
+
+  test("should evalutate double numbers with default base 10", () {
+    expect(evaluate("sqrt(15.2+0.7)/19.0", flags: ["-f"]), "2.098673898671251@-1");
+    expect(evaluate("sqrt(1.52@1+0.7)/1.90@1", flags: ["-f"]), "2.098673898671251@-1");
+  });
+
+
+  // TODO(ThorstenJahrsetz): 20.12.22 add more special function
 }

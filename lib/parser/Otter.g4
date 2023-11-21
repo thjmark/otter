@@ -12,7 +12,9 @@ expression: FN expression')'
            ;
 number: ('-'|'+')number
         |NUM'.'NUM'@'('-'|'+')?NUM'#'NUM
+        |NUM'.'NUM'@'('-'|'+')?NUM
         |NUM'.'NUM'#'NUM|
+        |NUM'.'NUM|
         |NUM'#'NUM
         |NUM;
 

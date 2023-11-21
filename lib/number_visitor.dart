@@ -85,12 +85,15 @@ class NumberVisitor extends OtterVisitor<Number> {
     if (ctx.childCount == 2) {
       return _handleSign(ctx);
     }
-    if (ctx.childCount >= 5) {
+    if (ctx.childCount >= 5 ||
+        (ctx.childCount >= 3 && _containsNoBaseSeparator(ctx))) {
       return numberFactory.parseFloat(ctx.children!, ctx.childCount);
     }
 
     return numberFactory.parseNumber(ctx.text);
   }
+
+  bool _containsNoBaseSeparator(NumberContext ctx) => !ctx.children!.map((e) => e.text).contains(numberFactory.baseSeparator);
 
   Number _handleSign(NumberContext ctx) {
     final absoluteValue = ctx.children![1].accept(this);
