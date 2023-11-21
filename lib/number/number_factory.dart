@@ -32,6 +32,9 @@ class NumberFactory {
 
   double _getExponentialPart(List<ParseTree> children, int childNumber, int base) {
     final indexExponentSeparator = children.indexWhere((element) => element.text == exponentSeparator);
+    if (indexExponentSeparator < 0) {
+      return 1;
+    }
     final exponentElements = children.sublist(indexExponentSeparator + 1, childNumber - 2);
     final exponentValue = NumberParser.parseInt(exponentElements.last.text!, base);
     final exponentSign = exponentElements.length == 2 ? (exponentElements[0].text == '-' ? -1 : 1) : 1;
