@@ -12,13 +12,14 @@ expression: FN expression')'
             |expression('+'|'-')expression
             |number
            ;
-number: ('-'|'+')number
-        |NUM'.'NUM'@'('-'|'+')?NUM'#'NUM
-        |NUM'.'NUM'@'('-'|'+')?NUM
-        |NUM'.'NUM'#'NUM|
-        |NUM'.'NUM|
-        |NUM'#'NUM
-        |NUM;
+number: ('-'|'+')number #sign
+        |NUM'.'NUM'@'('-'|'+')?NUM'#'NUM #float
+        |NUM'.'NUM'@'('-'|'+')?NUM #floatBase10
+        |NUM'.'NUM'#'NUM #decimal
+        |NUM'.'NUM #decimalBase10
+        |NUM'#'NUM #int
+        |NUM #intBase10
+        ;
 
 
 FN: ([a-z])+'(';

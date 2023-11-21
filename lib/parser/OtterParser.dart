@@ -100,8 +100,8 @@ class OtterParser extends Parser {
       enterOuterAlt(_localctx, 1);
       state = 23;
       errorHandler.sync(this);
-      switch (interpreter!.adaptivePredict(tokenStream, 1, context)) {
-      case 1:
+      switch (tokenStream.LA(1)!) {
+      case TOKEN_FN:
         state = 14;
         match(TOKEN_FN);
         state = 15;
@@ -109,7 +109,7 @@ class OtterParser extends Parser {
         state = 16;
         match(TOKEN_T__1);
         break;
-      case 2:
+      case TOKEN_T__2:
         state = 18;
         match(TOKEN_T__2);
         state = 19;
@@ -117,10 +117,14 @@ class OtterParser extends Parser {
         state = 20;
         match(TOKEN_T__1);
         break;
-      case 3:
+      case TOKEN_T__9:
+      case TOKEN_T__10:
+      case TOKEN_NUM:
         state = 22;
         number();
         break;
+      default:
+        throw NoViableAltException(this);
       }
       context!.stop = tokenStream.LT(-1);
       state = 41;
@@ -226,10 +230,11 @@ class OtterParser extends Parser {
     enterRule(_localctx, 4, RULE_number);
     int _la;
     try {
-      state = 78;
+      state = 76;
       errorHandler.sync(this);
       switch (interpreter!.adaptivePredict(tokenStream, 6, context)) {
       case 1:
+        _localctx = SignContext(_localctx);
         enterOuterAlt(_localctx, 1);
         state = 44;
         _la = tokenStream.LA(1)!;
@@ -244,6 +249,7 @@ class OtterParser extends Parser {
         number();
         break;
       case 2:
+        _localctx = FloatContext(_localctx);
         enterOuterAlt(_localctx, 2);
         state = 46;
         match(TOKEN_NUM);
@@ -276,6 +282,7 @@ class OtterParser extends Parser {
         match(TOKEN_NUM);
         break;
       case 3:
+        _localctx = FloatBase10Context(_localctx);
         enterOuterAlt(_localctx, 3);
         state = 56;
         match(TOKEN_NUM);
@@ -304,6 +311,7 @@ class OtterParser extends Parser {
         match(TOKEN_NUM);
         break;
       case 4:
+        _localctx = DecimalContext(_localctx);
         enterOuterAlt(_localctx, 4);
         state = 64;
         match(TOKEN_NUM);
@@ -317,34 +325,29 @@ class OtterParser extends Parser {
         match(TOKEN_NUM);
         break;
       case 5:
+        _localctx = DecimalBase10Context(_localctx);
         enterOuterAlt(_localctx, 5);
-
+        state = 69;
+        match(TOKEN_NUM);
+        state = 70;
+        match(TOKEN_T__11);
+        state = 71;
+        match(TOKEN_NUM);
         break;
       case 6:
+        _localctx = IntContext(_localctx);
         enterOuterAlt(_localctx, 6);
-        state = 70;
-        match(TOKEN_NUM);
-        state = 71;
-        match(TOKEN_T__11);
         state = 72;
+        match(TOKEN_NUM);
+        state = 73;
+        match(TOKEN_T__13);
+        state = 74;
         match(TOKEN_NUM);
         break;
       case 7:
+        _localctx = IntBase10Context(_localctx);
         enterOuterAlt(_localctx, 7);
-
-        break;
-      case 8:
-        enterOuterAlt(_localctx, 8);
-        state = 74;
-        match(TOKEN_NUM);
         state = 75;
-        match(TOKEN_T__13);
-        state = 76;
-        match(TOKEN_NUM);
-        break;
-      case 9:
-        enterOuterAlt(_localctx, 9);
-        state = 77;
         match(TOKEN_NUM);
         break;
       }
@@ -378,33 +381,32 @@ class OtterParser extends Parser {
   }
 
   static const List<int> _serializedATN = [
-      4,1,17,81,2,0,7,0,2,1,7,1,2,2,7,2,1,0,1,0,1,0,1,0,1,0,3,0,12,8,0,1,
+      4,1,17,79,2,0,7,0,2,1,7,1,2,2,7,2,1,0,1,0,1,0,1,0,1,0,3,0,12,8,0,1,
       1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,24,8,1,1,1,1,1,1,1,1,1,1,
       1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,40,8,1,10,1,12,1,43,9,1,
       1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,52,8,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,
       1,2,3,2,62,8,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,
-      1,2,1,2,3,2,79,8,2,1,2,0,1,2,3,0,2,4,0,2,1,0,7,9,1,0,10,11,95,0,11,
-      1,0,0,0,2,23,1,0,0,0,4,78,1,0,0,0,6,7,3,2,1,0,7,8,5,1,0,0,8,9,5,16,
-      0,0,9,12,1,0,0,0,10,12,3,2,1,0,11,6,1,0,0,0,11,10,1,0,0,0,12,1,1,0,
-      0,0,13,14,6,1,-1,0,14,15,5,15,0,0,15,16,3,2,1,0,16,17,5,2,0,0,17,24,
-      1,0,0,0,18,19,5,3,0,0,19,20,3,2,1,0,20,21,5,2,0,0,21,24,1,0,0,0,22,
-      24,3,4,2,0,23,13,1,0,0,0,23,18,1,0,0,0,23,22,1,0,0,0,24,41,1,0,0,0,
-      25,26,10,5,0,0,26,27,5,5,0,0,27,40,3,2,1,6,28,29,10,3,0,0,29,30,7,
-      0,0,0,30,40,3,2,1,4,31,32,10,2,0,0,32,33,7,1,0,0,33,40,3,2,1,3,34,
-      35,10,6,0,0,35,36,5,4,0,0,36,40,5,16,0,0,37,38,10,4,0,0,38,40,5,6,
-      0,0,39,25,1,0,0,0,39,28,1,0,0,0,39,31,1,0,0,0,39,34,1,0,0,0,39,37,
-      1,0,0,0,40,43,1,0,0,0,41,39,1,0,0,0,41,42,1,0,0,0,42,3,1,0,0,0,43,
-      41,1,0,0,0,44,45,7,1,0,0,45,79,3,4,2,0,46,47,5,16,0,0,47,48,5,12,0,
-      0,48,49,5,16,0,0,49,51,5,13,0,0,50,52,7,1,0,0,51,50,1,0,0,0,51,52,
-      1,0,0,0,52,53,1,0,0,0,53,54,5,16,0,0,54,55,5,14,0,0,55,79,5,16,0,0,
-      56,57,5,16,0,0,57,58,5,12,0,0,58,59,5,16,0,0,59,61,5,13,0,0,60,62,
-      7,1,0,0,61,60,1,0,0,0,61,62,1,0,0,0,62,63,1,0,0,0,63,79,5,16,0,0,64,
-      65,5,16,0,0,65,66,5,12,0,0,66,67,5,16,0,0,67,68,5,14,0,0,68,79,5,16,
-      0,0,69,79,1,0,0,0,70,71,5,16,0,0,71,72,5,12,0,0,72,79,5,16,0,0,73,
-      79,1,0,0,0,74,75,5,16,0,0,75,76,5,14,0,0,76,79,5,16,0,0,77,79,5,16,
-      0,0,78,44,1,0,0,0,78,46,1,0,0,0,78,56,1,0,0,0,78,64,1,0,0,0,78,69,
-      1,0,0,0,78,70,1,0,0,0,78,73,1,0,0,0,78,74,1,0,0,0,78,77,1,0,0,0,79,
-      5,1,0,0,0,7,11,23,39,41,51,61,78
+      3,2,77,8,2,1,2,0,1,2,3,0,2,4,0,2,1,0,7,9,1,0,10,11,91,0,11,1,0,0,0,
+      2,23,1,0,0,0,4,76,1,0,0,0,6,7,3,2,1,0,7,8,5,1,0,0,8,9,5,16,0,0,9,12,
+      1,0,0,0,10,12,3,2,1,0,11,6,1,0,0,0,11,10,1,0,0,0,12,1,1,0,0,0,13,14,
+      6,1,-1,0,14,15,5,15,0,0,15,16,3,2,1,0,16,17,5,2,0,0,17,24,1,0,0,0,
+      18,19,5,3,0,0,19,20,3,2,1,0,20,21,5,2,0,0,21,24,1,0,0,0,22,24,3,4,
+      2,0,23,13,1,0,0,0,23,18,1,0,0,0,23,22,1,0,0,0,24,41,1,0,0,0,25,26,
+      10,5,0,0,26,27,5,5,0,0,27,40,3,2,1,6,28,29,10,3,0,0,29,30,7,0,0,0,
+      30,40,3,2,1,4,31,32,10,2,0,0,32,33,7,1,0,0,33,40,3,2,1,3,34,35,10,
+      6,0,0,35,36,5,4,0,0,36,40,5,16,0,0,37,38,10,4,0,0,38,40,5,6,0,0,39,
+      25,1,0,0,0,39,28,1,0,0,0,39,31,1,0,0,0,39,34,1,0,0,0,39,37,1,0,0,0,
+      40,43,1,0,0,0,41,39,1,0,0,0,41,42,1,0,0,0,42,3,1,0,0,0,43,41,1,0,0,
+      0,44,45,7,1,0,0,45,77,3,4,2,0,46,47,5,16,0,0,47,48,5,12,0,0,48,49,
+      5,16,0,0,49,51,5,13,0,0,50,52,7,1,0,0,51,50,1,0,0,0,51,52,1,0,0,0,
+      52,53,1,0,0,0,53,54,5,16,0,0,54,55,5,14,0,0,55,77,5,16,0,0,56,57,5,
+      16,0,0,57,58,5,12,0,0,58,59,5,16,0,0,59,61,5,13,0,0,60,62,7,1,0,0,
+      61,60,1,0,0,0,61,62,1,0,0,0,62,63,1,0,0,0,63,77,5,16,0,0,64,65,5,16,
+      0,0,65,66,5,12,0,0,66,67,5,16,0,0,67,68,5,14,0,0,68,77,5,16,0,0,69,
+      70,5,16,0,0,70,71,5,12,0,0,71,77,5,16,0,0,72,73,5,16,0,0,73,74,5,14,
+      0,0,74,77,5,16,0,0,75,77,5,16,0,0,76,44,1,0,0,0,76,46,1,0,0,0,76,56,
+      1,0,0,0,76,64,1,0,0,0,76,69,1,0,0,0,76,72,1,0,0,0,76,75,1,0,0,0,77,
+      5,1,0,0,0,7,11,23,39,41,51,61,76
   ];
 
   static final ATN _ATN =
@@ -462,27 +464,164 @@ class ExpressionContext extends ParserRuleContext {
 }
 
 class NumberContext extends ParserRuleContext {
-  NumberContext? number() => getRuleContext<NumberContext>(0);
-  List<TerminalNode> NUMs() => getTokens(OtterParser.TOKEN_NUM);
-  TerminalNode? NUM(int i) => getToken(OtterParser.TOKEN_NUM, i);
   NumberContext([ParserRuleContext? parent, int? invokingState]) : super(parent, invokingState);
   @override
   int get ruleIndex => RULE_number;
+ 
+  @override
+  void copyFrom(ParserRuleContext ctx) {
+    super.copyFrom(ctx);
+  }
+}
+
+class FloatBase10Context extends NumberContext {
+  List<TerminalNode> NUMs() => getTokens(OtterParser.TOKEN_NUM);
+  TerminalNode? NUM(int i) => getToken(OtterParser.TOKEN_NUM, i);
+  FloatBase10Context(NumberContext ctx) { copyFrom(ctx); }
   @override
   void enterRule(ParseTreeListener listener) {
-    if (listener is OtterListener) listener.enterNumber(this);
+    if (listener is OtterListener) listener.enterFloatBase10(this);
   }
   @override
   void exitRule(ParseTreeListener listener) {
-    if (listener is OtterListener) listener.exitNumber(this);
+    if (listener is OtterListener) listener.exitFloatBase10(this);
   }
   @override
   T? accept<T>(ParseTreeVisitor<T> visitor) {
     if (visitor is OtterVisitor<T>) {
-     return visitor.visitNumber(this);
+     return visitor.visitFloatBase10(this);
     } else {
     	return visitor.visitChildren(this);
     }
   }
 }
 
+class SignContext extends NumberContext {
+  NumberContext? number() => getRuleContext<NumberContext>(0);
+  SignContext(NumberContext ctx) { copyFrom(ctx); }
+  @override
+  void enterRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.enterSign(this);
+  }
+  @override
+  void exitRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.exitSign(this);
+  }
+  @override
+  T? accept<T>(ParseTreeVisitor<T> visitor) {
+    if (visitor is OtterVisitor<T>) {
+     return visitor.visitSign(this);
+    } else {
+    	return visitor.visitChildren(this);
+    }
+  }
+}
+
+class DecimalBase10Context extends NumberContext {
+  List<TerminalNode> NUMs() => getTokens(OtterParser.TOKEN_NUM);
+  TerminalNode? NUM(int i) => getToken(OtterParser.TOKEN_NUM, i);
+  DecimalBase10Context(NumberContext ctx) { copyFrom(ctx); }
+  @override
+  void enterRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.enterDecimalBase10(this);
+  }
+  @override
+  void exitRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.exitDecimalBase10(this);
+  }
+  @override
+  T? accept<T>(ParseTreeVisitor<T> visitor) {
+    if (visitor is OtterVisitor<T>) {
+     return visitor.visitDecimalBase10(this);
+    } else {
+    	return visitor.visitChildren(this);
+    }
+  }
+}
+
+class FloatContext extends NumberContext {
+  List<TerminalNode> NUMs() => getTokens(OtterParser.TOKEN_NUM);
+  TerminalNode? NUM(int i) => getToken(OtterParser.TOKEN_NUM, i);
+  FloatContext(NumberContext ctx) { copyFrom(ctx); }
+  @override
+  void enterRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.enterFloat(this);
+  }
+  @override
+  void exitRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.exitFloat(this);
+  }
+  @override
+  T? accept<T>(ParseTreeVisitor<T> visitor) {
+    if (visitor is OtterVisitor<T>) {
+     return visitor.visitFloat(this);
+    } else {
+    	return visitor.visitChildren(this);
+    }
+  }
+}
+
+class DecimalContext extends NumberContext {
+  List<TerminalNode> NUMs() => getTokens(OtterParser.TOKEN_NUM);
+  TerminalNode? NUM(int i) => getToken(OtterParser.TOKEN_NUM, i);
+  DecimalContext(NumberContext ctx) { copyFrom(ctx); }
+  @override
+  void enterRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.enterDecimal(this);
+  }
+  @override
+  void exitRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.exitDecimal(this);
+  }
+  @override
+  T? accept<T>(ParseTreeVisitor<T> visitor) {
+    if (visitor is OtterVisitor<T>) {
+     return visitor.visitDecimal(this);
+    } else {
+    	return visitor.visitChildren(this);
+    }
+  }
+}
+
+class IntBase10Context extends NumberContext {
+  TerminalNode? NUM() => getToken(OtterParser.TOKEN_NUM, 0);
+  IntBase10Context(NumberContext ctx) { copyFrom(ctx); }
+  @override
+  void enterRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.enterIntBase10(this);
+  }
+  @override
+  void exitRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.exitIntBase10(this);
+  }
+  @override
+  T? accept<T>(ParseTreeVisitor<T> visitor) {
+    if (visitor is OtterVisitor<T>) {
+     return visitor.visitIntBase10(this);
+    } else {
+    	return visitor.visitChildren(this);
+    }
+  }
+}
+
+class IntContext extends NumberContext {
+  List<TerminalNode> NUMs() => getTokens(OtterParser.TOKEN_NUM);
+  TerminalNode? NUM(int i) => getToken(OtterParser.TOKEN_NUM, i);
+  IntContext(NumberContext ctx) { copyFrom(ctx); }
+  @override
+  void enterRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.enterInt(this);
+  }
+  @override
+  void exitRule(ParseTreeListener listener) {
+    if (listener is OtterListener) listener.exitInt(this);
+  }
+  @override
+  T? accept<T>(ParseTreeVisitor<T> visitor) {
+    if (visitor is OtterVisitor<T>) {
+     return visitor.visitInt(this);
+    } else {
+    	return visitor.visitChildren(this);
+    }
+  }
+}

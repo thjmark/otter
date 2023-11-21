@@ -20,8 +20,45 @@ abstract class OtterVisitor<T> extends ParseTreeVisitor<T> {
   /// Return the visitor result.
   T? visitExpression(ExpressionContext ctx);
 
-  /// Visit a parse tree produced by [OtterParser.number].
+  /// Visit a parse tree produced by the {@code sign}
+  /// labeled alternative in {@link OtterParser#number}.
   /// [ctx] the parse tree.
   /// Return the visitor result.
-  T? visitNumber(NumberContext ctx);
+  T? visitSign(SignContext ctx);
+
+  /// Visit a parse tree produced by the {@code float}
+  /// labeled alternative in {@link OtterParser#number}.
+  /// [ctx] the parse tree.
+  /// Return the visitor result.
+  T? visitFloat(FloatContext ctx);
+
+  /// Visit a parse tree produced by the {@code floatBase10}
+  /// labeled alternative in {@link OtterParser#number}.
+  /// [ctx] the parse tree.
+  /// Return the visitor result.
+  T? visitFloatBase10(FloatBase10Context ctx);
+
+  /// Visit a parse tree produced by the {@code decimal}
+  /// labeled alternative in {@link OtterParser#number}.
+  /// [ctx] the parse tree.
+  /// Return the visitor result.
+  T? visitDecimal(DecimalContext ctx);
+
+  /// Visit a parse tree produced by the {@code decimalBase10}
+  /// labeled alternative in {@link OtterParser#number}.
+  /// [ctx] the parse tree.
+  /// Return the visitor result.
+  T? visitDecimalBase10(DecimalBase10Context ctx);
+
+  /// Visit a parse tree produced by the {@code int}
+  /// labeled alternative in {@link OtterParser#number}.
+  /// [ctx] the parse tree.
+  /// Return the visitor result.
+  T? visitInt(IntContext ctx);
+
+  /// Visit a parse tree produced by the {@code intBase10}
+  /// labeled alternative in {@link OtterParser#number}.
+  /// [ctx] the parse tree.
+  /// Return the visitor result.
+  T? visitIntBase10(IntBase10Context ctx);
 }

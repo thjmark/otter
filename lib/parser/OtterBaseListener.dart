@@ -28,11 +28,59 @@ class OtterBaseListener implements OtterListener {
 
   /// The default implementation does nothing.
   @override
-  void enterNumber(NumberContext ctx) {}
+  void enterSign(SignContext ctx) {}
 
   /// The default implementation does nothing.
   @override
-  void exitNumber(NumberContext ctx) {}
+  void exitSign(SignContext ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void enterFloat(FloatContext ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void exitFloat(FloatContext ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void enterFloatBase10(FloatBase10Context ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void exitFloatBase10(FloatBase10Context ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void enterDecimal(DecimalContext ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void exitDecimal(DecimalContext ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void enterDecimalBase10(DecimalBase10Context ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void exitDecimalBase10(DecimalBase10Context ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void enterInt(IntContext ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void exitInt(IntContext ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void enterIntBase10(IntBase10Context ctx) {}
+
+  /// The default implementation does nothing.
+  @override
+  void exitIntBase10(IntBase10Context ctx) {}
 
   /// The default implementation does nothing.
   @override

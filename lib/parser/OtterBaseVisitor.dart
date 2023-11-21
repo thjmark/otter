@@ -23,5 +23,29 @@ class OtterBaseVisitor<T> extends ParseTreeVisitor<T> implements OtterVisitor<T>
   /// The default implementation returns the result of calling
   /// [visitChildren] on [ctx].
   @override
-  T? visitNumber(NumberContext ctx) => visitChildren(ctx);
+  T? visitSign(SignContext ctx) => visitChildren(ctx);
+  /// The default implementation returns the result of calling
+  /// [visitChildren] on [ctx].
+  @override
+  T? visitFloat(FloatContext ctx) => visitChildren(ctx);
+  /// The default implementation returns the result of calling
+  /// [visitChildren] on [ctx].
+  @override
+  T? visitFloatBase10(FloatBase10Context ctx) => visitChildren(ctx);
+  /// The default implementation returns the result of calling
+  /// [visitChildren] on [ctx].
+  @override
+  T? visitDecimal(DecimalContext ctx) => visitChildren(ctx);
+  /// The default implementation returns the result of calling
+  /// [visitChildren] on [ctx].
+  @override
+  T? visitDecimalBase10(DecimalBase10Context ctx) => visitChildren(ctx);
+  /// The default implementation returns the result of calling
+  /// [visitChildren] on [ctx].
+  @override
+  T? visitInt(IntContext ctx) => visitChildren(ctx);
+  /// The default implementation returns the result of calling
+  /// [visitChildren] on [ctx].
+  @override
+  T? visitIntBase10(IntBase10Context ctx) => visitChildren(ctx);
 }
