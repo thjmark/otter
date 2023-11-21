@@ -87,20 +87,46 @@ class NumberVisitor extends OtterVisitor<Number> {
     return argument!.applyFunction(functionName, flags: flags);
   }
 
-  @override
-  Number? visitNumber(NumberContext ctx) {
-    if (ctx.childCount == 2) {
-      return _handleSign(ctx);
-    }
-    if (ctx.childCount >= 5 || (ctx.childCount >= 3 && _containsNoBaseSeparator(ctx))) {
-      return numberFactory.parseFloat(ctx.children!, ctx.childCount);
-    }
-
-    return numberFactory.parseNumber(ctx.text);
+  bool _isBaseChange(ExpressionContext ctx) {
+    return ctx.childCount >= 2 && ctx.children![1].text == '>';
   }
 
-  bool _containsNoBaseSeparator(NumberContext ctx) =>
-      !ctx.children!.map((e) => e.text).contains(numberFactory.baseSeparator);
+  @override
+  Number? visitDecimal(DecimalContext ctx) {
+    return numberFactory.parseFloat(ctx.children!, ctx.childCount);// TODO(ThorstenJahrsetz): 09.01.23 clean this up
+  }
+
+  @override
+  Number? visitDecimalBase10(DecimalBase10Context ctx) {
+    return numberFactory.parseFloat(ctx.children!, ctx.childCount);// TODO(ThorstenJahrsetz): 09.01.23 clean this up
+  }
+
+  @override
+  Number? visitFloat(FloatContext ctx) {
+    return numberFactory.parseFloat(ctx.children!, ctx.childCount);// TODO(ThorstenJahrsetz): 09.01.23 clean this up
+  }
+
+  @override
+  Number? visitFloatBase10(FloatBase10Context ctx) {
+    return numberFactory.parseFloat(ctx.children!, ctx.childCount);// TODO(ThorstenJahrsetz): 09.01.23 clean this up
+  }
+
+  @override
+  Number? visitInt(IntContext ctx) {
+    return numberFactory.parseNumber(ctx.text); // TODO(ThorstenJahrsetz): 09.01.23 clean this up
+  }
+
+  @override
+  Number? visitIntBase10(IntBase10Context ctx) {
+    return numberFactory.parseNumber(ctx.text);// TODO(ThorstenJahrsetz): 09.01.23 clean this up
+  }
+
+  @override
+  Number? visitSign(SignContext ctx) {
+    return _handleSign(ctx);
+  }
+
+
 
   Number _handleSign(NumberContext ctx) {
     final absoluteValue = ctx.children![1].accept(this);
@@ -110,7 +136,4 @@ class NumberVisitor extends OtterVisitor<Number> {
     return absoluteValue!;
   }
 
-  bool _isBaseChange(ExpressionContext ctx) {
-    return ctx.childCount >= 2 && ctx.children![1].text == '>';
-  }
 }
