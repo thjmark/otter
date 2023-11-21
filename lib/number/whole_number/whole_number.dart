@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:otter/number/function_handler.dart';
 import 'package:otter/number/number.dart';
 import 'package:otter/number/whole_number/whole_number_printer.dart';
 
@@ -54,7 +55,17 @@ class WholeNumber extends Number {
   }
 
   @override
-  Number nSqrt() {
-    return WholeNumber(sqrt(value).round());
+  Number applyFunction(String functionName) {
+    return WholeNumber(FunctionHandler().handleFunction(functionName: functionName, value: value, base: base).round(),
+        base: base);
+  }
+
+  @override
+  Number factorial() {
+    var result = 1;
+    for (int i = 1; i <= value; i++) {
+      result *= i;
+    }
+    return WholeNumber(result, base: base);
   }
 }

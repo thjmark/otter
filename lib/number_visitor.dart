@@ -1,4 +1,5 @@
 import 'package:otter/number/number_factory.dart';
+import 'package:otter/number/number_parser.dart';
 import 'package:otter/parser/OtterParser.dart';
 import 'package:otter/parser/OtterVisitor.dart';
 import 'package:otter/parsing_error.dart';
@@ -15,9 +16,17 @@ class NumberVisitor extends OtterVisitor<Number> {
     if (ctx.childCount == 1) {
       return _getNumber(ctx);
     }
+    if (ctx.childCount == 2 && ctx.children![1].text == "!") {
+      return ctx.children![0].accept(this)?.factorial();
+    }
     if (ctx.childCount == 3) {
-      if (isInBrakets(ctx)) {
+      if (_isInBrakets(ctx)) {
         return ctx.children![1].accept(this);
+      }
+      if (_isBaseChange(ctx)) {
+        final value = ctx.children![0].accept(this);
+        final newBase = NumberParser.parseInt(ctx.children![2].text!, 10);
+        return value!.setBase(newBase);
       }
       if (_isFunctionCall(ctx)) {
         return _handleFunctionCall(ctx);
@@ -26,7 +35,7 @@ class NumberVisitor extends OtterVisitor<Number> {
     }
   }
 
-  bool isInBrakets(ExpressionContext ctx) => ctx.children![0].text == '(' && ctx.children![2].text == ')';
+  bool _isInBrakets(ExpressionContext ctx) => ctx.children![0].text == '(' && ctx.children![2].text == ')';
 
   bool _isFunctionCall(ExpressionContext ctx) {
     return ctx.children![2].text == ')';
@@ -74,10 +83,7 @@ class NumberVisitor extends OtterVisitor<Number> {
   Number? _handleFunctionCall(ExpressionContext ctx) {
     final argument = ctx.children![1].accept(this);
     final functionName = ctx.children![0].text!.split('(')[0];
-    switch (functionName) {
-      case 'sqrt':
-        return argument!.nSqrt();
-    }
+    return argument!.applyFunction(functionName);
   }
 
   @override
@@ -85,15 +91,15 @@ class NumberVisitor extends OtterVisitor<Number> {
     if (ctx.childCount == 2) {
       return _handleSign(ctx);
     }
-    if (ctx.childCount >= 5 ||
-        (ctx.childCount >= 3 && _containsNoBaseSeparator(ctx))) {
+    if (ctx.childCount >= 5 || (ctx.childCount >= 3 && _containsNoBaseSeparator(ctx))) {
       return numberFactory.parseFloat(ctx.children!, ctx.childCount);
     }
 
     return numberFactory.parseNumber(ctx.text);
   }
 
-  bool _containsNoBaseSeparator(NumberContext ctx) => !ctx.children!.map((e) => e.text).contains(numberFactory.baseSeparator);
+  bool _containsNoBaseSeparator(NumberContext ctx) =>
+      !ctx.children!.map((e) => e.text).contains(numberFactory.baseSeparator);
 
   Number _handleSign(NumberContext ctx) {
     final absoluteValue = ctx.children![1].accept(this);
@@ -101,5 +107,9 @@ class NumberVisitor extends OtterVisitor<Number> {
       return absoluteValue!.flipSign();
     }
     return absoluteValue!;
+  }
+
+  bool _isBaseChange(ExpressionContext ctx) {
+    return ctx.childCount >= 2 && ctx.children![1].text == '>';
   }
 }

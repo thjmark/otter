@@ -6,8 +6,14 @@ const VALID_DECIMAL_PLACES_DOUBLE = 17;
 
 class FloatNumberPrinter {
   static String print(double value, int base) {
+    if (value == 0) {
+      return "0";
+    }
     if (base == 10) {
-      return value.toStringAsExponential().replaceAll("e", "@").replaceAll("+", "");
+      if (value.abs() >= 10||value.abs()<1) {
+        return value.toStringAsExponential().replaceAll("e", "@").replaceAll("+", "");
+      }
+      return value.toString();
     }
 
     final fullExponent = log(value.abs()) / log(base);
@@ -16,8 +22,14 @@ class FloatNumberPrinter {
 
     final String stringNumericalParts = _buildNumericalPart(numericalPart, base);
 
-    final exponent= WholeNumberPrinter().printIntForBase(value: wholeExponent, base: base);
-    return "$stringNumericalParts@$exponent";
+    final endPartOfNumber = _buildEndPartOfNumber(wholeExponent, base);
+    return "$stringNumericalParts$endPartOfNumber";
+  }
+
+  static String _buildEndPartOfNumber(int wholeExponent, int base) {
+    final exponentIfApplicable = "@${WholeNumberPrinter().printIntForBase(value: wholeExponent, base: base)}";
+    final onlyBaseIfApplicable = base != 10 ? "#$base" : "";
+    return wholeExponent == 0 ? onlyBaseIfApplicable : exponentIfApplicable;
   }
 
   static String _buildNumericalPart(double numericalPart, int base) {

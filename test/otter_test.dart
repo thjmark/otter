@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:otter/otter.dart';
 import 'package:otter/parsing_error.dart';
 import 'package:test/test.dart';
@@ -121,6 +123,27 @@ void main() {
     expect(evaluate("sqrt(1.52@1+0.7)/1.90@1", flags: ["-f"]), "2.098673898671251@-1");
   });
 
+  test("should evaluate ln", () {
+    expect(evaluate("ln(2.0)", flags: ["-f"]), "6.931471805599453@-1");
+  });
 
-  // TODO(ThorstenJahrsetz): 20.12.22 add more special function
+  test("should evaluate log to correct base", () {
+    expect(evaluate("log(2.0)", flags: ["-f"]), "3.0102999566398114@-1");
+  });
+
+  test("should evaluate log to correct base, should allow to switch base", () {
+    expect(evaluate("log(2.0>2)"), "1.0#2");
+  });
+
+  test("should evaluate factorial", () {
+    expect(evaluate("6!"), "720");
+    expect(evaluate("0!"), "1");
+  });
+
+  test("should print 0", () {
+    expect(evaluate("0"), "0");
+    expect(evaluate("0.0"), "0");
+  });
+
+  // TODO(ThorstenJahrsetz): 20.12.22 add trigonomic function
 }

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:antlr4/src/tree/src/tree.dart';
 import 'package:otter/number/float_number/float_number.dart';
-import 'package:otter/number/whole_number_parser.dart';
+import 'package:otter/number/number_parser.dart';
 import 'package:otter/number/whole_number/whole_number.dart';
 
 import 'number.dart';

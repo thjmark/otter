@@ -26,5 +26,12 @@ void main() {
     expect(() => WholeNumber(15, base: 63).toString(), throwsA(ParsingError("Base > 62 not supported")));
   });
 
+  test("output 0 ",(){
+    expect(WholeNumber(0,base: 10).toString(), "0");
+  });
+
+  test("output no exponential if exponential is 0", (){
+    expect(WholeNumber(1,base: 10).toString(), "1");
+  });
 
 }

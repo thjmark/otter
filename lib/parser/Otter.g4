@@ -5,7 +5,9 @@ result: expression'=#'NUM
 
 expression: FN expression')'
             |'('expression')'
+            |expression'>'NUM
             |expression'^'expression
+            |expression'!'
             |expression('*'|'/'|'%')expression
             |expression('+'|'-')expression
             |number

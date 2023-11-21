@@ -3,6 +3,9 @@ import 'package:otter/number/number_constants.dart';
 
 class WholeNumberPrinter {
   String printIntForBase({required int value, required int base}) {
+    if (value == 0) {
+      return "0";
+    }
     _checkBase(base);
     String result = _mapNumber(value: value, base: base);
     if (base == 10) {

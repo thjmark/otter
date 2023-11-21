@@ -26,5 +26,7 @@ abstract class Number  {
 
   Number setBase(int newBase);
 
-  Number nSqrt();
+  Number applyFunction(String functionName);
+
+  Number factorial();
 }
