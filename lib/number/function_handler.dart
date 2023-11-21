@@ -11,6 +11,18 @@ class FunctionHandler {
         return log(value);
       case "log":
         return log(value) / log(base);
+      case "sin":
+        return sin(value);
+      case "cos":
+        return cos(value);
+      case "tan":
+        return tan(value);
+      case "asin":
+        return asin(value);
+      case "acos":
+        return acos(value);
+      case "atan":
+        return atan(value);
     }
     throw ParsingError("The function $functionName is not implemented");
   }
