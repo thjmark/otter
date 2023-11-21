@@ -11,6 +11,7 @@ expression: FN expression')'
             |number
            ;
 number: ('-'|'+')number
+        |NUM'.'NUM'@'('-'|'+')?NUM'#'NUM
         |NUM'#'NUM
         |NUM;
 
