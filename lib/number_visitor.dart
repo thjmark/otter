@@ -15,9 +15,6 @@ class NumberVisitor extends OtterVisitor<Number> {
     if (ctx.childCount == 1) {
       return _getNumber(ctx);
     }
-    if (ctx.childCount == 2) {
-      return _handleSign(ctx);
-    }
     if (ctx.childCount == 3) {
       if (isInBrakets(ctx)) {
         return ctx.children![1].accept(this);
@@ -74,11 +71,6 @@ class NumberVisitor extends OtterVisitor<Number> {
     throw UnimplementedError();
   }
 
-  @override
-  Number? visitNumber(NumberContext ctx) {
-    return numberFactory.parseNumber(ctx.text);
-  }
-
   Number? _handleFunctionCall(ExpressionContext ctx) {
     final argument = ctx.children![1].accept(this);
     final functionName = ctx.children![0].text!.split('(')[0];
@@ -88,7 +80,17 @@ class NumberVisitor extends OtterVisitor<Number> {
     }
   }
 
-  Number _handleSign(ExpressionContext ctx) {
+  @override
+  Number? visitNumber(NumberContext ctx) {
+    if (ctx.childCount == 2) {
+      return _handleSign(ctx);
+    }
+
+    return numberFactory.parseNumber(ctx.text);
+  }
+
+
+  Number _handleSign(NumberContext ctx) {
     final absoluteValue = ctx.children![1].accept(this);
     if (ctx.children![0].text == '-') {
       return absoluteValue!.flipSign();

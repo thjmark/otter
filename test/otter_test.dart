@@ -36,6 +36,12 @@ void main() {
     expect(calculate("a#37"), 36);
   });
 
+  // TODO(ThorstenJahrsetz): 18.12.22 next step parse Float
+  /*test('parseNumber floating Point number', () {
+    final result = calculate("-9.221@-32#10", flags: ["-f"]);
+    expect(result, -9.221e-32);
+  });*/
+
   test("get defaultResult (base 10)", () {
     expect(evaluate("1A#16"), "26");
   });
@@ -44,59 +50,56 @@ void main() {
     expect(evaluate("26=#16"), "1A#16");
   });
 
-  test("should get negative of number",(){
+  test("should get negative of number", () {
     expect(evaluate("-10"), "-10");
   });
 
-  test("should add two numbers",(){
-    expect(evaluate("17+4"),"21");
-    expect(evaluate("11#16+A#16=#16"),"1B#16");
+  test("should add two numbers", () {
+    expect(evaluate("17+4"), "21");
+    expect(evaluate("11#16+A#16=#16"), "1B#16");
   });
-  test("should subtract two numbers",(){
-    expect(evaluate("17-4"),"13");
-    expect(evaluate("11#16-A#16=#16"),"7#16");
-  });
-
-  test("should multiply two numbers",(){
-    expect(evaluate("4*5"),"20");
-    expect(evaluate("40#16*2"),"128");
+  test("should subtract two numbers", () {
+    expect(evaluate("17-4"), "13");
+    expect(evaluate("11#16-A#16=#16"), "7#16");
   });
 
-  test("should multiply two numbers",(){
-    expect(evaluate("4*5"),"20");
-    expect(evaluate("40#16*2"),"128");
+  test("should multiply two numbers", () {
+    expect(evaluate("4*5"), "20");
+    expect(evaluate("40#16*2"), "128");
   });
 
-  test("should divide two numbers",(){
-    expect(evaluate("12/3"),"4");
-    expect(evaluate("11#7/2"),"4");
+  test("should multiply two numbers", () {
+    expect(evaluate("4*5"), "20");
+    expect(evaluate("40#16*2"), "128");
   });
 
-  test("should divide two numbers and round correct",(){
-    expect(evaluate("5/3"),"2");
-    expect(evaluate("7/2"),"4");
-    expect(evaluate("4/3"),"1");
+  test("should divide two numbers", () {
+    expect(evaluate("12/3"), "4");
+    expect(evaluate("11#7/2"), "4");
   });
 
-
-  test("should divide two numbers multiplication before addition",(){
-    expect(evaluate("(1+2)/3"),"1");
-    expect(evaluate("1+2/3"),"2");
+  test("should divide two numbers and round correct", () {
+    expect(evaluate("5/3"), "2");
+    expect(evaluate("7/2"), "4");
+    expect(evaluate("4/3"), "1");
   });
 
-  test("should calculate modulus of two numbers",(){
-    expect(evaluate("5%3"),"2");
-    expect(evaluate("7%2"),"1");
+  test("should divide two numbers multiplication before addition", () {
+    expect(evaluate("(1+2)/3"), "1");
+    expect(evaluate("1+2/3"), "2");
   });
 
-  test("should calculate power of two numbers",(){
-    expect(evaluate("3^4"),"81");
-    expect(evaluate("2^5"),"32");
+  test("should calculate modulus of two numbers", () {
+    expect(evaluate("5%3"), "2");
+    expect(evaluate("7%2"), "1");
   });
 
-  test("should calculate sqrt of number",(){
-    expect(evaluate("sqrt(16)"),"4");
+  test("should calculate power of two numbers", () {
+    expect(evaluate("3^4"), "81");
+    expect(evaluate("2^5"), "32");
   });
 
-
+  test("should calculate sqrt of number", () {
+    expect(evaluate("sqrt(16)"), "4");
+  });
 }
