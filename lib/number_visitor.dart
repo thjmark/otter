@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:otter/number/number_factory.dart';
 import 'package:otter/parser/OtterParser.dart';
 import 'package:otter/parser/OtterVisitor.dart';
@@ -44,17 +42,17 @@ class NumberVisitor extends OtterVisitor<Number> {
     final secondNumber = ctx.children![2].accept(this);
     switch (ctx.children![1].text) {
       case "+":
-        return Number(firstNumber!.value + secondNumber!.value);
+        return firstNumber!.add(secondNumber!);
       case "-":
-        return Number(firstNumber!.value - secondNumber!.value);
+        return firstNumber!.subtract(secondNumber!);
       case "*":
-        return Number(firstNumber!.value * secondNumber!.value);
+        return firstNumber!.multiply(secondNumber!);
       case "/":
-        return Number((firstNumber!.value / secondNumber!.value).round());
+        return firstNumber!.divide(secondNumber!);
       case "%":
-        return Number(firstNumber!.value % secondNumber!.value);
+        return firstNumber!.modulo(secondNumber!);
       case "^":
-        return Number(pow(firstNumber!.value, secondNumber!.value).round());
+        return firstNumber!.nPow(secondNumber!);
     }
     throw ParsingError("Unknown operator ${ctx.children![1].text}");
   }
@@ -71,7 +69,7 @@ class NumberVisitor extends OtterVisitor<Number> {
     if (ctx.childCount == 3) {
       final result = ctx.children![0].accept(this);
       final base = int.parse(ctx.children![2].text!);
-      return Number(result!.value, base: base);
+      return result!.setBase(base);
     }
     throw UnimplementedError();
   }
@@ -86,13 +84,15 @@ class NumberVisitor extends OtterVisitor<Number> {
     final functionName = ctx.children![0].text!.split('(')[0];
     switch (functionName) {
       case 'sqrt':
-        return Number(sqrt(argument!.value).round());
+        return argument!.nSqrt();
     }
   }
 
   Number _handleSign(ExpressionContext ctx) {
     final absoluteValue = ctx.children![1].accept(this);
-    final sign = ctx.children![0].text == '-' ? -1 : 1;
-    return Number(absoluteValue!.value * sign);
+    if (ctx.children![0].text == '-') {
+      return absoluteValue!.flipSign();
+    }
+    return absoluteValue!;
   }
 }
