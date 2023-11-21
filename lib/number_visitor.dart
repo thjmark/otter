@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:otter/number/number_parser.dart';
+import 'package:otter/number/number_factory.dart';
 import 'package:otter/parser/OtterParser.dart';
 import 'package:otter/parser/OtterVisitor.dart';
 import 'package:otter/parsing_error.dart';
@@ -8,6 +8,10 @@ import 'package:otter/parsing_error.dart';
 import 'number/number.dart';
 
 class NumberVisitor extends OtterVisitor<Number> {
+  NumberVisitor(this.numberFactory);
+
+  final NumberFactory numberFactory;
+
   @override
   Number? visitExpression(ExpressionContext ctx) {
     if (ctx.childCount == 1) {
@@ -74,7 +78,7 @@ class NumberVisitor extends OtterVisitor<Number> {
 
   @override
   Number? visitNumber(NumberContext ctx) {
-    return Number(NumberParser.parseNumber(ctx.text));
+    return numberFactory.parseNumber(ctx.text);
   }
 
   Number? _handleFunctionCall(ExpressionContext ctx) {

@@ -4,7 +4,7 @@ import 'package:otter/parsing_error.dart';
 class NumberParser {
   static final String baseSplitter = "#";
 
-  static int parseNumber(String text) {
+  static int parseInt(String text) {
     final base = _getBase(text);
     final characterList = text.trim().split(baseSplitter)[0].runes;
     int result = 0;
