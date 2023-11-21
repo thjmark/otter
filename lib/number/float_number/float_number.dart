@@ -1,10 +1,16 @@
 import 'dart:math';
 
+import 'package:otter/number/float_number/float_number_printer.dart';
 import 'package:otter/number/number.dart';
 import 'package:otter/parsing_error.dart';
 
 class FloatNumber extends Number {
   FloatNumber(double value, {int? base}) : super(value, base: base);
+
+  @override
+  String toString() {
+    return FloatNumberPrinter.print(value.toDouble(), base);
+  }
 
   @override
   Number add(Number secondSummand) {
