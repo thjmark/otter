@@ -116,6 +116,8 @@ class OtterParser extends Parser {
         state = 20;
         match(TOKEN_T__1);
         break;
+      case TOKEN_T__7:
+      case TOKEN_T__8:
       case TOKEN_NUM:
         state = 22;
         number();
@@ -203,22 +205,37 @@ class OtterParser extends Parser {
   NumberContext number() {
     dynamic _localctx = NumberContext(context, state);
     enterRule(_localctx, 4, RULE_number);
+    int _la;
     try {
-      state = 43;
+      state = 45;
       errorHandler.sync(this);
       switch (interpreter!.adaptivePredict(tokenStream, 4, context)) {
       case 1:
         enterOuterAlt(_localctx, 1);
         state = 39;
-        match(TOKEN_NUM);
+        _la = tokenStream.LA(1)!;
+        if (!(_la == TOKEN_T__7 || _la == TOKEN_T__8)) {
+        errorHandler.recoverInline(this);
+        } else {
+          if ( tokenStream.LA(1)! == IntStream.EOF ) matchedEOF = true;
+          errorHandler.reportMatch(this);
+          consume();
+        }
         state = 40;
-        match(TOKEN_T__9);
-        state = 41;
-        match(TOKEN_NUM);
+        number();
         break;
       case 2:
         enterOuterAlt(_localctx, 2);
+        state = 41;
+        match(TOKEN_NUM);
         state = 42;
+        match(TOKEN_T__9);
+        state = 43;
+        match(TOKEN_NUM);
+        break;
+      case 3:
+        enterOuterAlt(_localctx, 3);
+        state = 44;
         match(TOKEN_NUM);
         break;
       }
@@ -250,21 +267,21 @@ class OtterParser extends Parser {
   }
 
   static const List<int> _serializedATN = [
-      4,1,13,46,2,0,7,0,2,1,7,1,2,2,7,2,1,0,1,0,1,0,1,0,1,0,3,0,12,8,0,1,
+      4,1,13,48,2,0,7,0,2,1,7,1,2,2,7,2,1,0,1,0,1,0,1,0,1,0,3,0,12,8,0,1,
       1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,24,8,1,1,1,1,1,1,1,1,1,1,
-      1,1,1,1,1,1,1,1,1,5,1,35,8,1,10,1,12,1,38,9,1,1,2,1,2,1,2,1,2,3,2,
-      44,8,2,1,2,0,1,2,3,0,2,4,0,2,1,0,5,7,1,0,8,9,49,0,11,1,0,0,0,2,23,
-      1,0,0,0,4,43,1,0,0,0,6,7,3,2,1,0,7,8,5,1,0,0,8,9,5,12,0,0,9,12,1,0,
-      0,0,10,12,3,2,1,0,11,6,1,0,0,0,11,10,1,0,0,0,12,1,1,0,0,0,13,14,6,
-      1,-1,0,14,15,5,11,0,0,15,16,3,2,1,0,16,17,5,2,0,0,17,24,1,0,0,0,18,
-      19,5,3,0,0,19,20,3,2,1,0,20,21,5,2,0,0,21,24,1,0,0,0,22,24,3,4,2,0,
-      23,13,1,0,0,0,23,18,1,0,0,0,23,22,1,0,0,0,24,36,1,0,0,0,25,26,10,4,
-      0,0,26,27,5,4,0,0,27,35,3,2,1,5,28,29,10,3,0,0,29,30,7,0,0,0,30,35,
-      3,2,1,4,31,32,10,2,0,0,32,33,7,1,0,0,33,35,3,2,1,3,34,25,1,0,0,0,34,
-      28,1,0,0,0,34,31,1,0,0,0,35,38,1,0,0,0,36,34,1,0,0,0,36,37,1,0,0,0,
-      37,3,1,0,0,0,38,36,1,0,0,0,39,40,5,12,0,0,40,41,5,10,0,0,41,44,5,12,
-      0,0,42,44,5,12,0,0,43,39,1,0,0,0,43,42,1,0,0,0,44,5,1,0,0,0,5,11,23,
-      34,36,43
+      1,1,1,1,1,1,1,1,1,5,1,35,8,1,10,1,12,1,38,9,1,1,2,1,2,1,2,1,2,1,2,
+      1,2,3,2,46,8,2,1,2,0,1,2,3,0,2,4,0,2,1,0,5,7,1,0,8,9,52,0,11,1,0,0,
+      0,2,23,1,0,0,0,4,45,1,0,0,0,6,7,3,2,1,0,7,8,5,1,0,0,8,9,5,12,0,0,9,
+      12,1,0,0,0,10,12,3,2,1,0,11,6,1,0,0,0,11,10,1,0,0,0,12,1,1,0,0,0,13,
+      14,6,1,-1,0,14,15,5,11,0,0,15,16,3,2,1,0,16,17,5,2,0,0,17,24,1,0,0,
+      0,18,19,5,3,0,0,19,20,3,2,1,0,20,21,5,2,0,0,21,24,1,0,0,0,22,24,3,
+      4,2,0,23,13,1,0,0,0,23,18,1,0,0,0,23,22,1,0,0,0,24,36,1,0,0,0,25,26,
+      10,4,0,0,26,27,5,4,0,0,27,35,3,2,1,5,28,29,10,3,0,0,29,30,7,0,0,0,
+      30,35,3,2,1,4,31,32,10,2,0,0,32,33,7,1,0,0,33,35,3,2,1,3,34,25,1,0,
+      0,0,34,28,1,0,0,0,34,31,1,0,0,0,35,38,1,0,0,0,36,34,1,0,0,0,36,37,
+      1,0,0,0,37,3,1,0,0,0,38,36,1,0,0,0,39,40,7,1,0,0,40,46,3,4,2,0,41,
+      42,5,12,0,0,42,43,5,10,0,0,43,46,5,12,0,0,44,46,5,12,0,0,45,39,1,0,
+      0,0,45,41,1,0,0,0,45,44,1,0,0,0,46,5,1,0,0,0,5,11,23,34,36,45
   ];
 
   static final ATN _ATN =
@@ -321,6 +338,7 @@ class ExpressionContext extends ParserRuleContext {
 }
 
 class NumberContext extends ParserRuleContext {
+  NumberContext? number() => getRuleContext<NumberContext>(0);
   List<TerminalNode> NUMs() => getTokens(OtterParser.TOKEN_NUM);
   TerminalNode? NUM(int i) => getToken(OtterParser.TOKEN_NUM, i);
   NumberContext([ParserRuleContext? parent, int? invokingState]) : super(parent, invokingState);

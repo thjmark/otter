@@ -10,7 +10,8 @@ expression: FN expression')'
             |expression('+'|'-')expression
             |number
            ;
-number: NUM'#'NUM
+number: ('-'|'+')number
+        |NUM'#'NUM
         |NUM;
 
 
