@@ -2,6 +2,8 @@ import 'package:otter/otter.dart';
 import 'package:otter/parsing_error.dart';
 import 'package:test/test.dart';
 
+import 'test_util.dart';
+
 void main() {
   test('parseNumber base 10', () {
     expect(calculate("15"), 15);
@@ -36,11 +38,16 @@ void main() {
     expect(calculate("a#37"), 36);
   });
 
-  // TODO(ThorstenJahrsetz): 18.12.22 next step parse Float
-  /*test('parseNumber floating Point number', () {
-    final result = calculate("-9.221@-32#10", flags: ["-f"]);
-    expect(result, -9.221e-32);
-  });*/
+  test('parseNumber floating Point number full exponent', () {
+    testFloatEquals(calculate("-9.221@-32#10", flags: ["-f"]), -9.221e-32);
+    testFloatEquals(calculate("-9.221@32#10", flags: ["-f"]), -9.221e32);
+  });
+
+  test('parseNumber floating Point number full exponent', () {
+    testFloatEquals(calculate("3122.122#10", flags: ["-f"]), 3122.122);
+  });
+
+
 
   test("get defaultResult (base 10)", () {
     expect(evaluate("1A#16"), "26");

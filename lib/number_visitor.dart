@@ -85,10 +85,12 @@ class NumberVisitor extends OtterVisitor<Number> {
     if (ctx.childCount == 2) {
       return _handleSign(ctx);
     }
+    if (ctx.childCount >= 7) {
+      return numberFactory.parseFloat(ctx.children!, ctx.childCount);
+    }
 
     return numberFactory.parseNumber(ctx.text);
   }
-
 
   Number _handleSign(NumberContext ctx) {
     final absoluteValue = ctx.children![1].accept(this);
