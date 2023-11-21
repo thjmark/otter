@@ -1,3 +1,9 @@
-## 1.0.0
+## 0.8.0
 
-- Initial version.
+- Initial version based on a small test Project to learn Antlr.
+
+
+
+# TODO
+- more functions (sinh,....)
+- better documentation

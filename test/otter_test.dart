@@ -192,5 +192,5 @@ void main() {
     expect(evaluate("atan(1.0)", flags: ["-deg"]), "4.5@1");
   });
 
-  // TODO(ThorstenJahrsetz): 20.12.22 add special functions like sinh,...
+  // TODO: 20.12.22 add special functions like sinh,...
 }
