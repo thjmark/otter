@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:otter/otter.dart';
 import 'package:otter/parsing_error.dart';
 import 'package:test/test.dart';
@@ -145,39 +143,49 @@ void main() {
     expect(evaluate("0.0"), "0");
   });
 
-
-  test("should evaluate sin",(){
+  test("should evaluate sin", () {
     expect(evaluate("sin(0)"), "0");
     expect(evaluate("sin(0.5235987755983)"), "5.00000000000001@-1");
     expect(evaluate("sin(1.5707963267948966)"), "1.0");
   });
 
-  test("should evaluate cos",(){
+  test("should evaluate cos", () {
     expect(evaluate("cos(0.0)"), "1.0");
     expect(evaluate("cos(1.0471975511965976)"), "5.000000000000001@-1");
     expect(evaluate("cos(1.5707963267948966)"), "6.123233995736766@-17");
   });
 
-  test("should evaluate tan",(){
+  test("should evaluate tan", () {
     expect(evaluate("tan(0)"), "0");
     expect(evaluate("tan(0.78539816339744836)"), "1.0000000000000002");
   });
 
-  test("should evaluate asin",(){
+  test("should evaluate asin", () {
     expect(evaluate("asin(0.0)"), "0");
     expect(evaluate("asin(0.5)"), "5.235987755982989@-1");
   });
 
-  test("should evaluate acos",(){
+  test("should evaluate acos", () {
     expect(evaluate("acos(1.0)"), "0");
     expect(evaluate("acos(0.5)"), "1.0471975511965979");
   });
 
-  test("should evaluate atan",(){
+  test("should evaluate atan", () {
     expect(evaluate("atan(1.0)"), "7.853981633974483@-1");
     expect(evaluate("atan(0.0)"), "0");
   });
 
-  // TODO(ThorstenJahrsetz): 20.12.22 add degrees with flags
+  test("should evaluate trigonomics in degrees", () {
+    expect(evaluate("sin(30.0)", flags: ["-deg"]), "4.9999999999999994@-1");
+    expect(evaluate("cos(60.0)", flags: ["-deg"]), "5.000000000000001@-1");
+    expect(evaluate("tan(45.0)", flags: ["-deg"]), "9.999999999999999@-1");
+  });
+
+  test("should evaluate reverse trigonomics in degrees", () {
+    expect(evaluate("asin(0.5)", flags: ["-deg"]), "3.0000000000000004@1");
+    expect(evaluate("acos(0.5)", flags: ["-deg"]), "6.000000000000001@1");
+    expect(evaluate("atan(1.0)", flags: ["-deg"]), "4.5@1");
+  });
+
   // TODO(ThorstenJahrsetz): 20.12.22 add special functions like sinh,...
 }

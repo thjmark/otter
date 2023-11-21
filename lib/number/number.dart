@@ -26,7 +26,7 @@ abstract class Number  {
 
   Number setBase(int newBase);
 
-  Number applyFunction(String functionName);
+  Number applyFunction(String functionName, {required List<String> flags});
 
   Number factorial();
 }

@@ -54,8 +54,9 @@ class FloatNumber extends Number {
   }
 
   @override
-  Number applyFunction(String functionName) {
-    return FloatNumber(FunctionHandler().handleFunction(functionName: functionName, value: value, base: base),
+  Number applyFunction(String functionName, {required List<String> flags}) {
+    return FloatNumber(
+        FunctionHandler().handleFunction(functionName: functionName, value: value, base: base, flags: flags),
         base: base);
   }
 

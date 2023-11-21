@@ -55,8 +55,9 @@ class WholeNumber extends Number {
   }
 
   @override
-  Number applyFunction(String functionName) {
-    return WholeNumber(FunctionHandler().handleFunction(functionName: functionName, value: value, base: base).round(),
+  Number applyFunction(String functionName, {required List<String> flags}) {
+    return WholeNumber(
+        FunctionHandler().handleFunction(functionName: functionName, value: value, base: base, flags: flags).round(),
         base: base);
   }
 

@@ -13,7 +13,7 @@ num calculate(String expression, {List<String>? flags}) {
 Number? _evaluateExpression(String expression, List<String> flags) {
   OtterParser parser = _buildTree(expression);
   final tree = parser.expression();
-  final result = NumberVisitor(NumberFactory(flags)).visit(tree);
+  final result = NumberVisitor(NumberFactory(flags), flags).visit(tree);
   return result;
 }
 
@@ -29,6 +29,6 @@ OtterParser _buildTree(String expression) {
 String evaluate(String expression, {List<String>? flags}) {
   final parser = _buildTree(expression);
   final tree = parser.result();
-  final result = NumberVisitor(NumberFactory(flags ?? [])).visit(tree);
+  final result = NumberVisitor(NumberFactory(flags ?? []), flags ?? []).visit(tree);
   return result?.toString() ?? '';
 }

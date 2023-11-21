@@ -7,9 +7,10 @@ import 'package:otter/parsing_error.dart';
 import 'number/number.dart';
 
 class NumberVisitor extends OtterVisitor<Number> {
-  NumberVisitor(this.numberFactory);
+  NumberVisitor(this.numberFactory, this.flags);
 
   final NumberFactory numberFactory;
+  final List<String> flags;
 
   @override
   Number? visitExpression(ExpressionContext ctx) {
@@ -83,7 +84,7 @@ class NumberVisitor extends OtterVisitor<Number> {
   Number? _handleFunctionCall(ExpressionContext ctx) {
     final argument = ctx.children![1].accept(this);
     final functionName = ctx.children![0].text!.split('(')[0];
-    return argument!.applyFunction(functionName);
+    return argument!.applyFunction(functionName, flags: flags);
   }
 
   @override
