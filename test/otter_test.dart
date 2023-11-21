@@ -44,6 +44,10 @@ void main() {
     expect(evaluate("26=#16"), "1A#16");
   });
 
+  test("should get negative of number",(){
+    expect(evaluate("-10"), "-10");
+  });
+
   test("should add two numbers",(){
     expect(evaluate("17+4"),"21");
     expect(evaluate("11#16+A#16=#16"),"1B#16");

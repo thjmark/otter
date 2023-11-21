@@ -17,8 +17,13 @@ void main() {
     expect(Number(61, base: 62).printForBase(), "z#62");
   });
 
+  test("print negative Numbers",(){
+   expect(Number(-1,base: 10).printForBase(), "-1");
+  });
+
   test("Show error when base to large", () {
     expect(() => Number(15, base: 63).printForBase(), throwsA(ParsingError("Base > 62 not supported")));
   });
+
 
 }

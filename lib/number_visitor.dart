@@ -13,6 +13,9 @@ class NumberVisitor extends OtterVisitor<Number> {
     if (ctx.childCount == 1) {
       return _getNumber(ctx);
     }
+    if (ctx.childCount == 2) {
+      return _handleSign(ctx);
+    }
     if (ctx.childCount == 3) {
       if (isInBrakets(ctx)) {
         return ctx.children![1].accept(this);
@@ -81,5 +84,11 @@ class NumberVisitor extends OtterVisitor<Number> {
       case 'sqrt':
         return Number(sqrt(argument!.value).round());
     }
+  }
+
+  Number _handleSign(ExpressionContext ctx) {
+    final absoluteValue = ctx.children![1].accept(this);
+    final sign = ctx.children![0].text == '-' ? -1 : 1;
+    return Number(absoluteValue!.value * sign);
   }
 }

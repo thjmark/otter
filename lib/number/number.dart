@@ -4,24 +4,28 @@ import 'package:otter/parsing_error.dart';
 class Number {
   Number(this.value, {int? base}) : base = base ?? 10;
 
+  // TODO(ThorstenJahrsetz): 15.12.22 move parsing to here
+
   final int value;
   final int base;
 
   String printForBase() {
     _checkBase();
     String result = "";
-    int restOfNumber = value;
+    int restOfNumber = value.abs();
+
     while (restOfNumber > 0) {
       int currentDigit = restOfNumber % base;
       result += _mapCurrentDigit(currentDigit);
       restOfNumber -= currentDigit;
       restOfNumber = (restOfNumber / base).round();
     }
-    result = _turnDigitsAround(result);
+    String sign = value.sign < 0 ? '-' : '';
+    result = "$sign${_turnDigitsAround(result)}";
     if (base == 10) {
       return result;
     }
-    return "$result#$base";
+    return "$sign$result#$base";
   }
 
   String _turnDigitsAround(String result) => result.split("").reversed.join("");
